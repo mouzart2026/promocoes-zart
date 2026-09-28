@@ -1,0 +1,29 @@
+{
+  "termos": [
+    {
+      "termo": "notebook gamer",
+      "queda_minima_pct": 15.0,
+      "plataformas": ["mercado_livre", "shopee"],
+      "preco_minimo": 2000.0,
+      "preco_maximo": 15000.0
+    },
+    {
+      "termo": "fone bluetooth",
+      "queda_minima_pct": 20.0,
+      "plataformas": ["mercado_livre", "shopee"],
+      "preco_minimo": 50.0,
+      "preco_maximo": 1000.0
+    },
+    {
+      "termo": "smartphone",
+      "queda_minima_pct": 10.0,
+      "plataformas": ["mercado_livre", "shopee"],
+      "preco_minimo": 800.0,
+      "preco_maximo": 8000.0
+    }
+  ],
+  "configuracao_padrao": {
+    "intervalo_minutos": 60,
+    "log_level": "INFO"
+  }
+}
