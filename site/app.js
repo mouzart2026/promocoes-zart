@@ -8,10 +8,10 @@
 // CONFIGURATION
 // ========================================
 // Config is injected by Cloudflare Pages via inline script in index.html
-// using %%SUPABASE_ANON_KEY%% environment variable substitution
+// using %%SUPABASE_ANON_KEY%% environment variable substitution at the edge
 const SUPABASE_CONFIG = window.SUPABASE_CONFIG || {
     url: 'https://innyohbvgtsoihooykxp.supabase.co',
-    anonKey: '',
+    anonKey: '%%SUPABASE_ANON_KEY%%',
     table: 'ofertas_encontradas',
     select: 'produto_id,titulo,preco_anterior,preco_novo,queda_pct,link,criado_em,plataforma,imagem',
     order: 'criado_em.desc',
