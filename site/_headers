@@ -3,4 +3,11 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Cache-Control: public, max-age=3600, must-revalidate
+  
+# Shorter cache for JS to ensure config updates are picked up
+/app.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
+# Longer cache for static assets
+/assets/img/*
+  Cache-Control: public, max-age=86400

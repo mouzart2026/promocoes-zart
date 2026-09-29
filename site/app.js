@@ -7,8 +7,9 @@
 // ========================================
 // CONFIGURATION
 // ========================================
-const SUPABASE_CONFIG = {
-    // URL is safe to hardcode (not a secret); anonKey comes from /api/config
+// Config is injected by Cloudflare Pages via inline script in index.html
+// using %%SUPABASE_ANON_KEY%% environment variable substitution
+const SUPABASE_CONFIG = window.SUPABASE_CONFIG || {
     url: 'https://innyohbvgtsoihooykxp.supabase.co',
     anonKey: '',
     table: 'ofertas_encontradas',
@@ -16,24 +17,6 @@ const SUPABASE_CONFIG = {
     order: 'criado_em.desc',
     limit: 200
 };
-
-// Fetch dynamic config from Pages Function
-async function fetchConfig() {
-    try {
-        const response = await fetch('/api/config');
-        if (response.ok) {
-            const config = await response.json();
-            if (config.url && config.anonKey) {
-                SUPABASE_CONFIG.url = config.url;
-                SUPABASE_CONFIG.anonKey = config.anonKey;
-                return true;
-            }
-        }
-    } catch (e) {
-        console.warn('Usando configuração padrão do app.js');
-    }
-    return false;
-}
 
 // ========================================
 // STATE
@@ -499,10 +482,8 @@ function setupEventListeners() {
 // ========================================
 async function init() {
     // Fetch dynamic config from Pages Function
-    await fetchConfig();
-
-    // Check if config has valid anonKey
-    if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) {
+    // Check if config has valid anonKey (after Cloudflare Pages env var substitution)
+    if (!SUPABASE_CONFIG.anonKey || SUPABASE_CONFIG.anonKey === '%%SUPABASE_ANON_KEY%%') {
         hideLoading();
         const offersEl = document.getElementById('offers');
         if (offersEl) {
