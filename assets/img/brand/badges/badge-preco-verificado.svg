@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Preço Verificado">
+<title>Preço Verificado</title>
+<circle cx="26" cy="26" r="18" fill="none" stroke="#0E6B4C" stroke-width="4"/>
+<path d="M26 14 C17.16 14 10 21.16 10 30 C10 38.84 17.16 46 26 46 C34.84 46 42 38.84 42 30 C42 21.16 34.84 14 26 14 Z"/>
+<path d="M44 40 L54 50 L48 56" stroke="#0E6B4C" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M40 24 H52 C53.1 24 54 24.9 54 26 V34 C54 35.1 53.1 36 52 36 H48" fill="#e84d2a" stroke="#e84d2a"/>
+</svg>

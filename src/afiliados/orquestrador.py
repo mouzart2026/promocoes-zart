@@ -4,7 +4,7 @@ import logging
 from datetime import datetime
 from typing import Any
 
-from afiliados import armazenamento, links, mercado_livre, shopee, whatsapp
+from afiliados import armazenamento, links, mercado_livre, mercado_livre_parser, shopee, whatsapp
 
 logger = logging.getLogger(__name__)
 
@@ -55,6 +55,19 @@ def _buscar_produtos_plataforma(
     if plataforma == "shopee":
         return list(shopee.buscar_produtos(termo, limite))
     raise ValueError(f"Plataforma desconhecida: {plataforma}")
+
+
+def _extrair_produtos_urls_ml(urls: list[str]) -> list[dict[str, Any]]:
+    """
+    Extrai dados de produtos do Mercado Livre a partir de URLs.
+
+    Args:
+        urls: Lista de URLs de produtos do Mercado Livre.
+
+    Returns:
+        Lista de produtos normalizados com id, titulo, preco, link.
+    """
+    return mercado_livre_parser.extrair_produtos_das_urls(urls)
 
 
 def _processar_produto(
@@ -183,23 +196,26 @@ def _processar_produto(
 
 
 def rodar(
-    termo: str,
+    termo: str = "",
     limite_queda_pct: float = 10.0,
     plataformas: list[str] | None = None,
     enviar_whatsapp: bool = False,
     preco_minimo: float | None = None,
     preco_maximo: float | None = None,
+    urls_mercado_livre: list[str] | None = None,
 ) -> list[dict[str, Any]]:
     """
     Executa uma rodada de busca e detecção de ofertas.
 
     Args:
-        termo: Termo de busca (usado em todas as plataformas).
+        termo: Termo de busca (usado em plataformas que não sejam ML por URL).
         limite_queda_pct: Porcentagem mínima de queda para considerar oferta (padrão: 10.0).
-        plataformas: Lista de plataformas para buscar (padrão: ["mercado_livre"]).
+        plataformas: Lista de plataformas para buscar via API (padrão: ["mercado_livre"]).
         enviar_whatsapp: Se True, envia notificações via WhatsApp para cada oferta (padrão: False).
         preco_minimo: Preço mínimo aceitável para ofertas (opcional).
         preco_maximo: Preço máximo aceitável para ofertas (opcional).
+        urls_mercado_livre: Lista de URLs de produtos do Mercado Livre para extrair dados via HTML parsing.
+                           Se fornecido, ignora busca por termo no ML e usa estas URLs.
 
     Returns:
         Lista de ofertas encontradas nesta rodada.
@@ -208,18 +224,48 @@ def rodar(
         plataformas = ["mercado_livre"]
 
     logger.info(
-        "Iniciando rodada: termo='%s', queda_min=%.1f%%, plataformas=%s, whatsapp=%s, preco_min=%s, preco_max=%s",
+        "Iniciando rodada: termo='%s', queda_min=%.1f%%, plataformas=%s, whatsapp=%s, preco_min=%s, preco_max=%s, urls_ml=%d",
         termo,
         limite_queda_pct,
         plataformas,
         enviar_whatsapp,
         preco_minimo,
         preco_maximo,
+        len(urls_mercado_livre) if urls_mercado_livre else 0,
     )
 
     agora = datetime.now()
     ofertas_encontradas = []
 
+    # Processa URLs do Mercado Livre se fornecidas
+    if urls_mercado_livre:
+        try:
+            produtos_ml = _extrair_produtos_urls_ml(urls_mercado_livre)
+        except mercado_livre_parser.MercadoLivreParserError as e:
+            logger.warning("Erro ao extrair produtos do ML via URLs: %s", e)
+            produtos_ml = []
+
+        for produto in produtos_ml:
+            try:
+                oferta = _processar_produto(
+                    produto,
+                    "mercado_livre",
+                    limite_queda_pct,
+                    agora,
+                    enviar_whatsapp,
+                    preco_minimo,
+                    preco_maximo,
+                )
+                if oferta:
+                    ofertas_encontradas.append(oferta)
+            except (armazenamento.SupabaseError, links.PlataformaNaoImplementada) as e:
+                logger.warning("Erro ao processar produto %s: %s", produto.get("id"), e)
+                continue
+
+        # Remove mercado_livre das plataformas para não buscar via API também
+        plataformas = [p for p in plataformas if p != "mercado_livre"]
+
+    # Processa demais plataformas via API (busca por termo)
     for plataforma in plataformas:
         try:
             produtos = _buscar_produtos_plataforma(plataforma, termo)

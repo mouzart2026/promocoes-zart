@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Compra Segura">
+<title>Compra Segura</title>
+<path d="M32 4 C18 4 6 16 6 30 C6 44 18 56 32 56 S58 44 58 30 C58 16 46 4 32 4 Z" fill="#16a34a" stroke="#16a34a" stroke-width="2"/>
+<path d="M22 30 L28 36 L44 22" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

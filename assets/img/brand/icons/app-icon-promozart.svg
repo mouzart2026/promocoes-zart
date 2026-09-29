@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="PromoZart App Icon">
+<title>PromoZart App Icon</title>
+<rect width="400" height="400" rx="80" fill="#0E6B4C"/>
+
+<!-- Cart handle -->
+<path d="M125 120 C145 98, 175 98, 195 120" stroke="#F6F4EF" stroke-width="18" fill="none" stroke-linecap="round"/>
+
+<!-- Cart basket -->
+<path d="M95 145 H225 L175 310 H100 L95 145 Z" fill="#F6F4EF" stroke="#F6F4EF" stroke-width="14"/>
+
+<!-- Z integrated in basket -->
+<path d="M135 170 H165 L135 240 H165" stroke="#0E6B4C" stroke-width="14" stroke-linecap="round"/>
+
+<!-- Cart wheels -->
+<circle cx="135" cy="320" r="12" fill="#0E6B4C"/>
+<circle cx="195" cy="320" r="12" fill="#0E6B4C"/>
+</svg>

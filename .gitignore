@@ -95,7 +95,7 @@ logs/
 .ropeproject
 
 # mkdocs documentation
-/site
+# /site  ← REMOVED: we use this as our frontend directory
 
 # mypy
 .mypy_cache/

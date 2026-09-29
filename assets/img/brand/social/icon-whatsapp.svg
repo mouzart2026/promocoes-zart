@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="WhatsApp">
+<title>WhatsApp</title>
+<path d="M54 32 C54 18.7 43.3 8 32 8 C19.95 8 10 17.95 10 30 C10 39.95 16.25 48.5 26 52.5 L26 56 L32 56 L32 48 L30 48 C22.25 48 15.5 41.25 15.5 33.5 C15.5 25.75 22.25 19 30 19 C37.75 19 44.5 25.75 44.5 33.5 C44.5 40.5 39.5 44.5 32.5 44.5" fill="#25D36E"/>
+<path d="M52 52 L44 44" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+<!-- Subtle Z in the speech bubble circle area -->
+<path d="M24 28 H34 L24 40 H34" stroke="#0E6B4C" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

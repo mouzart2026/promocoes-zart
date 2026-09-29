@@ -118,7 +118,7 @@ class TestSalvarProduto:
         args, kwargs = mock_request.call_args
         assert args[0] == "POST"
         assert "produtos_rastreados" in args[1]
-        assert kwargs["params"]["on_conflict"] == "id,plataforma"
+        assert kwargs["params"]["on_conflict"] == "id"
         payload = kwargs["json"]
         assert payload["id"] == "MLB123"
         assert payload["titulo"] == "Produto Teste"

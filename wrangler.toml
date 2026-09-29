@@ -1,4 +1,4 @@
-# Promoções Zart - Static Site for Cloudflare Pages
+# PromoZart - Static Site for Cloudflare Pages
 
 name = "promocoes-zart"
 pages_build_output_dir = "site"
@@ -8,14 +8,8 @@ compatibility_date = "2024-01-01"
 # [[pages_custom_domains]]
 # domain = "promocoes.zart.com.br"
 
-# Optional: environment variables (not needed for this static site since config is in app.js)
-# [vars]
-# SUPABASE_URL = "https://seu-projeto.supabase.co"
-# SUPABASE_ANON_KEY = "sua-anon-key"
-
-# Build command (not needed for pure static site, but useful if you add a build step later)
-# build_command = "echo 'No build step required'"
-
-# Redirects/headers can be added via _redirects and _headers files in site/
-# See: https://developers.cloudflare.com/pages/platform/redirects/
-# See: https://developers.cloudflare.com/pages/platform/headers/
+# Environment variables for Supabase
+# Set SUPABASE_ANON_KEY in Cloudflare Pages Dashboard → Settings → Environment variables
+# (Required for the /api/config function to serve the correct anon key)
+[var]
+SUPABASE_URL = "https://innyohbvgtsoihooykxp.supabase.co"

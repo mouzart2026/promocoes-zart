@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Promoções Zart</title>
+    <meta name="description" content="Dashboard de ofertas de afiliados - estatísticas e métricas">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Dashboard specific styles */
+        .dashboard-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title h1 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+        }
+
+        .dashboard-title p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.2;
+        }
+
+        .stat-value.accent { color: var(--color-accent); }
+        .stat-value.success { color: var(--color-success); }
+
+        .chart-section {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+
+        .chart-container {
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            padding: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .chart-bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            min-width: 40px;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .chart-bar {
+            width: 100%;
+            max-width: 60px;
+            background: linear-gradient(180deg, var(--color-accent), #ff6b35);
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            transition: height 0.3s ease, opacity 0.2s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .chart-bar:hover {
+            opacity: 0.8;
+        }
+
+        .chart-bar-value {
+            position: absolute;
+            top: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .chart-bar:hover .chart-bar-value,
+        .chart-bar:focus .chart-bar-value {
+            opacity: 1;
+        }
+
+        .chart-bar-label {
+            font-size: 0.65rem;
+            color: var(--color-text-muted);
+            text-align: center;
+            margin-top: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .platform-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: var(--radius-sm);
+        }
+
+        .legend-color.ml { background: #ffcc00; }
+        .legend-color.shopee { background: #ee4d2d; }
+
+        .top-offers {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .top-offer-row {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            transition: border-color var(--transition-fast);
+        }
+
+        .top-offer-row:hover {
+            border-color: var(--color-accent);
+        }
+
+        .top-offer-rank {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-text-muted);
+            min-width: 40px;
+        }
+
+        .top-offer-rank.gold { color: #ffd700; }
+        .top-offer-rank.silver { color: #c0c0c0; }
+        .top-offer-rank.bronze { color: #cd7f32; }
+
+        .top-offer-info {
+            min-width: 0;
+        }
+
+        .top-offer-title {
+            font-weight: 500;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .top-offer-meta {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .top-offer-prices {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.25rem;
+            text-align: right;
+        }
+
+        .top-offer-new {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-success);
+        }
+
+        .top-offer-old {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            text-decoration: line-through;
+        }
+
+        .top-offer-discount {
+            background: var(--color-accent);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+        }
+
+        .platform-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.15rem 0.4rem;
+            border-radius: var(--radius-sm);
+            text-transform: uppercase;
+        }
+
+        .platform-badge.ml { background: #fff3cd; color: #856404; }
+        .platform-badge.shopee { background: #fde8e6; color: #c62828; }
+
+        @media (prefers-color-scheme: dark) {
+            .platform-badge.ml { background: #3d2f00; color: #ffd700; }
+            .platform-badge.shopee { background: #3d1a1a; color: #ff6b6b; }
+        }
+
+        @media (max-width: 600px) {
+            .top-offer-row {
+                grid-template-columns: auto 1fr;
+                grid-template-rows: auto auto;
+            }
+            .top-offer-prices {
+                grid-column: 2;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .chart-container { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h1>Dashboard</h1>
+                    <p>Estatísticas das ofertas de afiliados</p>
+                </div>
+                <a href="index.html" class="btn btn-primary" style="width: auto;">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Ver Ofertas
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Carregando dashboard...</p>
+            </div>
+
+            <div id="error" class="empty hidden">
+                <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                <h2>Erro ao carregar</h2>
+                <p id="error-message"></p>
+                <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 1rem; width: auto;">Tentar novamente</button>
+            </div>
+
+            <div id="content" class="hidden">
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <article class="stat-card">
+                        <span class="stat-label">Total de Ofertas</span>
+                        <span class="stat-value accent" id="stat-total">—</span>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-label">Mercado Livre</span>
+                        <span class="stat-value" id="stat-ml" style="color: #ffcc00;">—</span>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-label">Shopee</span>
+                        <span class="stat-value" id="stat-shopee" style="color: #ee4d2d;">—</span>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-label">Maior Desconto</span>
+                        <span class="stat-value success" id="stat-max-discount">—</span>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-label">Desconto Médio</span>
+                        <span class="stat-value" id="stat-avg-discount">—</span>
+                    </article>
+                    <article class="stat-card">
+                        <span class="stat-label">Últimas 24h</span>
+                        <span class="stat-value" id="stat-last24h">—</span>
+                    </article>
+                </div>
+
+                <!-- Charts -->
+                <section class="chart-section">
+                    <h2 class="chart-title">Ofertas por Dia (últimos 14 dias)</h2>
+                    <div class="chart-container" id="chart-daily" role="img" aria-label="Gráfico de barras de ofertas por dia"></div>
+                    <div class="platform-legend">
+                        <span class="legend-item"><span class="legend-color ml"></span> Mercado Livre</span>
+                        <span class="legend-item"><span class="legend-color shopee"></span> Shopee</span>
+                    </div>
+                </section>
+
+                <section class="chart-section">
+                    <h2 class="chart-title">Ofertas por Plataforma</h2>
+                    <div class="chart-container" id="chart-platform" role="img" aria-label="Gráfico de barras de ofertas por plataforma"></div>
+                </section>
+
+                <!-- Top 10 Offers -->
+                <section class="chart-section">
+                    <h2 class="chart-title">Top 10 Maiores Descontos</h2>
+                    <div class="top-offers" id="top-offers"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="affiliate-disclaimer">
+                Como afiliado, posso receber comissão pelas compras feitas pelos links. Os preços podem mudar sem aviso.
+            </p>
+            <p>
+                Dashboard • Dados via
+                <a href="https://supabase.com" target="_blank" rel="noopener">Supabase</a>
+                • Atualizado automaticamente
+            </p>
+            <nav class="footer-nav">
+                <a href="index.html">Ofertas</a>
+                <a href="aviso.html">Aviso de Afiliado</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

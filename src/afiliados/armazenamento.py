@@ -63,7 +63,7 @@ def _headers() -> dict:
         "apikey": key,
         "Authorization": f"Bearer {key}",
         "Content-Type": "application/json",
-        "Prefer": "return=minimal",
+        "Prefer": "return=minimal,resolution=merge-duplicates",
     }
 
 
@@ -190,7 +190,7 @@ def salvar_produto(
         "POST",
         "produtos_rastreados",
         json=payload,
-        params={"on_conflict": "id,plataforma"},
+        params={"on_conflict": "id"},
     )
 
     logger.debug("Produto salvo com sucesso: %s (%s)", produto_id, plataforma)

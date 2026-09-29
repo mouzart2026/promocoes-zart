@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Links Oficiais">
+<title>Links Oficiais</title>
+<path d="M20 32 C20 24 26 18 34 18 C42 18 48 24 48 32" fill="none" stroke="#0E6B4C" stroke-width="4" stroke-linecap="round"/>
+<path d="M20 32 C20 38 26 42 34 42 C42 42 48 38 48 32" fill="none" stroke="#0E6B4C" stroke-width="4" stroke-linecap="round"/>
+<polygon points="12,18 16,22 12,26" fill="#0E6B4C"/>
+<polygon points="52,18 48,22 52,26" fill="#0E6B4C"/>
+<rect x="22" y="28" width="20" height="8" rx="2" fill="#e84d2a"/>
+</svg>

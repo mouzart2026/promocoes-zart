@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Instagram">
+<title>Instagram</title>
+<defs>
+    <linearGradient id="instaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#0E6B4C"/>
+        <stop offset="50%" stop-color="#0F8C62"/>
+        <stop offset="100%" stop-color="#F6F4EF"/>
+    </linearGradient>
+</defs>
+<rect x="4" y="4" width="56" height="56" rx="12" fill="url(#instaGrad)"/>
+
+<!-- Camera lens outline -->
+<circle cx="32" cy="32" r="14" fill="none" stroke="#ffffff" stroke-width="3"/>
+
+<!-- Inner circle with subtle Z/cart -->
+<circle cx="32" cy="32" r="7" fill="#0E6B4C"/>
+
+<!-- Subtle Z inside inner circle -->
+<path d="M27 29 H35 L27 38 H35" stroke="#F6F4EF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+<!-- Bottom right camera dot -->
+<circle cx="44" cy="44" r="4" fill="#ffffff"/>
+</svg>

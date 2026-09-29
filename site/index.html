@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromoZart - A promoção à frente</title>
+    <meta name="description" content="PromoZart: As melhores ofertas do Mercado Livre e Shopee com descontos reais verificados. Atualizado automaticamente em tempo real.">
+    <meta name="theme-color" content="#e84d2a">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://promocoes-zart.pages.dev">
+    <meta property="og:title" content="PromoZart - A promoção à frente">
+    <meta property="og:description" content="Ofertas reais do Mercado Livre e Shopee com descontos verificados. Atualizado automaticamente.">
+    <meta property="og:image" content="https://promocoes-zart.pages.dev/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://promocoes-zart.pages.dev">
+    <meta property="twitter:title" content="PromoZart - A promoção à frente">
+    <meta property="twitter:description" content="Ofertas reais do Mercado Livre e Shopee com descontos verificados.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Fonts & Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Trust Banner Top -->
+    <div class="trust-banner" id="trustBanner" role="status" aria-live="polite">
+        <div class="trust-banner-content">
+            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span class="trust-text">Preços verificados • Atualização automática • Links diretos para lojas oficiais</span>
+            <button class="trust-dismiss" id="trustDismiss" aria-label="Dispensar aviso">×</button>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-main">
+                <div class="brand">
+                    <div class="logo-container">
+                        <img src="assets/img/brand/logo-promozart.svg" alt="PromoZart" class="logo-img" width="240" height="60" aria-hidden="true">
+                        <span class="logo-text">PromoZart</span>
+                    </div>
+                    <p class="slogan">A promoção à frente</p>
+                </div>
+                <div class="value-props" aria-label="Nossos diferenciais">
+                    <div class="value-prop">
+                        <svg class="vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <span>Preços reais</span>
+                    </div>
+                    <div class="value-prop">
+                        <svg class="vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <span>Atualização contínua</span>
+                    </div>
+                    <div class="value-prop">
+                        <svg class="vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                            <polyline points="15 3 21 3 21 9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                        <span>Link direto</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Filters Bar -->
+            <div class="filters-bar" id="filtersBar" role="search" aria-label="Filtros de ofertas">
+                <div class="filter-group filter-search">
+                    <label for="searchInput" class="filter-label">Buscar ofertas</label>
+                    <div class="search-wrapper">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35"/>
+                        </svg>
+                        <input type="search" id="searchInput" class="filter-input" placeholder="Digite produto, marca ou categoria..." aria-label="Buscar ofertas">
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="platformFilter" class="filter-label">Plataforma</label>
+                    <select id="platformFilter" class="filter-select" aria-label="Filtrar por plataforma">
+                        <option value="">Todas</option>
+                        <option value="mercado_livre">Mercado Livre</option>
+                        <option value="shopee">Shopee</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="discountFilter" class="filter-label">Desconto mínimo</label>
+                    <select id="discountFilter" class="filter-select" aria-label="Filtrar por desconto mínimo">
+                        <option value="">Qualquer</option>
+                        <option value="10">10%+</option>
+                        <option value="20">20%+</option>
+                        <option value="30">30%+</option>
+                        <option value="50">50%+</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="timeFilter" class="filter-label">Período</label>
+                    <select id="timeFilter" class="filter-select" aria-label="Filtrar por período">
+                        <option value="">Todo o período</option>
+                        <option value="24">Últimas 24h</option>
+                        <option value="72">Últimas 72h</option>
+                        <option value="168">Últimos 7 dias</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sortFilter" class="filter-label">Ordenar</label>
+                    <select id="sortFilter" class="filter-select" aria-label="Ordenar ofertas">
+                        <option value="discount-desc">Maior desconto</option>
+                        <option value="recent-desc">Mais recentes</option>
+                        <option value="price-asc">Menor preço</option>
+                        <option value="price-desc">Maior preço</option>
+                    </select>
+                </div>
+
+                <div class="filter-group filter-actions">
+                    <button id="clearFilters" class="btn btn-secondary" aria-label="Limpar todos os filtros">Limpar</button>
+                </div>
+            </div>
+
+            <!-- Results Info -->
+            <div id="resultsInfo" class="results-info hidden" aria-live="polite">
+                <span id="resultsCount"></span>
+                <span id="lastUpdate" class="last-update"></span>
+            </div>
+
+            <div id="loading" class="loading hidden" aria-live="polite">
+                <div class="spinner"></div>
+                <p>Carregando as melhores ofertas...</p>
+            </div>
+
+            <div id="empty" class="empty hidden">
+                <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <path d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </svg>
+                <h2>Nenhuma oferta encontrada</h2>
+                <p>Tente ajustar os filtros ou volte mais tarde — novas ofertas chegam o tempo todo!</p>
+            </div>
+
+            <div id="offers" class="offers-grid" role="list" aria-label="Lista de ofertas"></div>
+
+            <!-- Bookmark Banner -->
+            <section class="bookmark-banner" id="bookmarkBanner" aria-label="Adicionar aos favoritos">
+                <div class="bookmark-content">
+                    <svg class="bookmark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
+                    </svg>
+                    <div class="bookmark-text">
+                        <strong>Não perca nenhuma oferta!</strong>
+                        <span>Adicione aos favoritos (Ctrl+D) e volte sempre.</span>
+                    </div>
+                    <button class="bookmark-dismiss" id="bookmarkDismiss" aria-label="Dispensar">×</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <!-- Trust Badges -->
+            <div class="trust-badges" aria-label="Selos de confiança">
+                <div class="trust-badge">
+                    <img src="assets/img/brand/badges/badge-compra-segura.svg" alt="Compra Segura" width="24" height="24" aria-hidden="true">
+                    <span>Compra Segura</span>
+                </div>
+                <div class="trust-badge">
+                    <img src="assets/img/brand/badges/badge-preco-verificado.svg" alt="Preço Verificado" width="24" height="24" aria-hidden="true">
+                    <span>Preço Verificado</span>
+                </div>
+                <div class="trust-badge">
+                    <img src="assets/img/brand/badges/badge-links-oficiais.svg" alt="Links Oficiais" width="24" height="24" aria-hidden="true">
+                    <span>Links Oficiais</span>
+                </div>
+                <div class="trust-badge">
+                    <img src="assets/img/brand/icons/favicon-promozart.svg" alt="Afiliado Oficial" width="24" height="24" aria-hidden="true">
+                    <span>Afiliado Oficial</span>
+                </div>
+            </div>
+
+            <p class="affiliate-disclaimer">
+                Como afiliado, posso receber comissão pelas compras feitas pelos links. Os preços podem mudar sem aviso prévio.
+            </p>
+            <p>
+                Atualizado automaticamente via
+                <a href="https://supabase.com" target="_blank" rel="noopener">Supabase</a>
+                • Dados de afiliados Mercado Livre & Shopee
+            </p>
+            <nav class="footer-nav">
+                <a href="aviso.html">Aviso de Afiliado</a>
+                <a href="dashboard.html">Dashboard</a>
+            </nav>
+
+            <!-- Social Links -->
+            <div class="social-links" aria-label="Redes sociais">
+                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">
+                    <img src="assets/img/brand/social/icon-whatsapp.svg" alt="WhatsApp" width="24" height="24">
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+                    <img src="assets/img/brand/social/icon-instagram.svg" alt="Instagram" width="24" height="24">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

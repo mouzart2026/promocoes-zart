@@ -1,0 +1,8 @@
+# Redirects for Cloudflare Pages
+# See: https://developers.cloudflare.com/pages/platform/redirects/
+
+# Exemplo: redirecionar /ofertas para home
+# /ofertas  /  301
+
+# SPA fallback (não necessário para site estático simples)
+# /*  /index.html  200

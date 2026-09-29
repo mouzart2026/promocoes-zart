@@ -1,0 +1,26 @@
+{
+    "name": "PromoZart - A promoção à frente",
+    "short_name": "PromoZart",
+    "description": "As melhores ofertas do Mercado Livre e Shopee com descontos reais verificados. Atualizado automaticamente em tempo real.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0E6B4C",
+    "theme_color": "#e84d2a",
+    "icons": [
+        {
+            "src": "/assets/img/brand/icons/favicon-promozart.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "/assets/img/brand/icons/app-icon-promozart-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/img/brand/icons/app-icon-promozart-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

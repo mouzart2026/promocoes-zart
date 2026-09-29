@@ -6,6 +6,7 @@ from afiliados import (
     links,
     mensagens,
     mercado_livre,
+    mercado_livre_parser,
     orquestrador,
     shopee,
     whatsapp,
@@ -13,6 +14,7 @@ from afiliados import (
 
 __all__ = [
     "mercado_livre",
+    "mercado_livre_parser",
     "shopee",
     "links",
     "armazenamento",

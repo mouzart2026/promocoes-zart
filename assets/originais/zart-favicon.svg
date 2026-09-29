@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Zart">
+<title>Zart</title>
+<rect width="200" height="200" rx="40" fill="#0E6B4C"/>
+<g transform="translate(-165,-95) scale(1.02)">
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M206 120 L302 262" stroke="#2E9E76" stroke-width="12"/>
+</g>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M190 120 H286 L190 214 H286" stroke="#F6F4EF" stroke-width="20"/>
+</g>
+</g>
+</svg>

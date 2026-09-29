@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 140" width="540" height="140" role="img" aria-label="PromoZart - A promoção à frente">
+<title>PromoZart — A promoção à frente</title>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Cart handle (evolved from Z diagonal - teal-green) -->
+  <path d="M65 40 C85 18, 135 18, 155 40" stroke="#0E6B4C" stroke-width="14" fill="none"/>
+
+  <!-- Cart basket: front panel (white) -->
+  <path d="M50 70 H170 L120 150 H55 L50 70 Z" fill="#ffffff" stroke="#0E6B4C" stroke-width="10"/>
+
+  <!-- Cart basket: side panel (teal, lighter) -->
+  <path d="M50 70 L55 75 L120 150 L115 150 Z" fill="#0F8C62" stroke="#0E6B4C" stroke-width="6"/>
+
+  <!-- Z element integrated into cart body -->
+  <path d="M85 85 H115 L85 135 H115" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Cart wheel (optional subtle detail) -->
+  <circle cx="85" cy="155" r="6" fill="#0E6B4C"/>
+  <circle cx="115" cy="155" r="6" fill="#0E6B4C"/>
+</g>
+
+<!-- Text -->
+<text x="210" y="105" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-weight="800" font-size="52" fill="#0F1714" letter-spacing="-0.5">Promo</text>
+<text x="210" y="105" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-weight="800" font-size="52" fill="#0E6B4C" letter-spacing="-0.5">Z</text>
+<text x="210" y="105" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-weight="800" font-size="52" fill="#0F1714" letter-spacing="-0.5">art</text>
+
+<!-- Slogan -->
+<text x="210" y="130" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-weight="500" font-size="18" fill="#6b6b80">A promoção à frente</text>
+</svg>

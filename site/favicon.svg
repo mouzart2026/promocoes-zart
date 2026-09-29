@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="PromoZart">
+<title>PromoZart</title>
+<rect width="200" height="200" rx="50" fill="#0E6B4C"/>
+
+<!-- Cart handle (teal arc) -->
+<path d="M65 55 C85 33, 115 33, 135 55" stroke="#ffffff" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+<!-- Cart basket -->
+<path d="M50 85 H150 L115 170 H60 L50 85 Z" fill="#ffffff" stroke="#ffffff" stroke-width="8"/>
+
+<!-- Z integrated in basket -->
+<path d="M80 100 H105 L80 145 H105" stroke="#0E6B4C" stroke-width="8" stroke-linecap="round"/>
+
+<!-- Cart wheels -->
+<circle cx="80" cy="172" r="8" fill="#0E6B4C"/>
+<circle cx="120" cy="172" r="8" fill="#0E6B4C"/>
+</svg>
