@@ -5,13 +5,11 @@
  */
 
 // ========================================
-// CONFIGURATION
+// CONFIGURATION (overwritten by /api/config at runtime)
 // ========================================
-// Config is injected by Cloudflare Pages via inline script in index.html
-// using %%SUPABASE_ANON_KEY%% environment variable substitution at the edge
 const SUPABASE_CONFIG = window.SUPABASE_CONFIG || {
     url: 'https://innyohbvgtsoihooykxp.supabase.co',
-    anonKey: '%%SUPABASE_ANON_KEY%%',
+    anonKey: '',
     table: 'ofertas_encontradas',
     select: 'produto_id,titulo,preco_anterior,preco_novo,queda_pct,link,criado_em,plataforma,imagem',
     order: 'criado_em.desc',
@@ -30,6 +28,26 @@ let currentFilters = {
     timeRange: '',
     sort: 'discount-desc'
 };
+
+// ========================================
+// API Functions
+// ========================================
+async function fetchConfig() {
+    try {
+        const response = await fetch('/api/config');
+        if (response.ok) {
+            const config = await response.json();
+            if (config.anonKey) {
+                SUPABASE_CONFIG.url = config.url;
+                SUPABASE_CONFIG.anonKey = config.anonKey;
+                return true;
+            }
+        }
+    } catch (e) {
+        console.warn('Using fallback config');
+    }
+    return false;
+}
 
 // ========================================
 // DOM Elements
@@ -481,10 +499,24 @@ function setupEventListeners() {
 // Main Initialization
 // ========================================
 async function init() {
-    // Fetch dynamic config from Pages Function
-    // Check if config has valid anonKey (after Cloudflare Pages env var substitution)
-    if (!SUPABASE_CONFIG.anonKey || SUPABASE_CONFIG.anonKey === '%%SUPABASE_ANON_KEY%%') {
-        hideLoading();
+    showLoading();
+    setupBannerHandlers();
+    setupEventListeners();
+
+    // Restore saved filters
+    const savedFilters = loadFilters();
+    if (savedFilters) {
+        currentFilters = { ...currentFilters, ...savedFilters };
+    }
+    updateUIFromFilters();
+
+    // Fetch config from Pages Function if anonKey isn't set
+    if (!SUPABASE_CONFIG.anonKey) {
+        await fetchConfig();
+    }
+
+    // Check if config has valid anonKey
+    if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) {
         const offersEl = document.getElementById('offers');
         if (offersEl) {
             offersEl.innerHTML = `

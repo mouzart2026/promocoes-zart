@@ -1,16 +1,13 @@
-# PromoZart - Static Site for Cloudflare Pages
-
 name = "promocoes-zart"
 pages_build_output_dir = "site"
 compatibility_date = "2024-01-01"
 
-# Optional: custom domain configuration (uncomment and configure after adding domain in dashboard)
+# Environment variables for Page Functions
+# Update these values with your actual Supabase credentials
+[vars]
+SUPABASE_URL = "https://innyohbvgtsoihooykxp.supabase.co"
+SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBaBmFzZSIsInJlZiI6ImlnbnlvaGJ2Z3Rzb2hib295a3hwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0ODg3MDIsImV4cCI6MjEwNjQ3MDJ9._GvT6Lax547QkTdeuOB5e_ciJKiR7mBS_bGkHMx7G8Q"
+
+# Optional: custom domain configuration
 # [[pages_custom_domains]]
 # domain = "promocoes.zart.com.br"
-
-# Environment variables must be set in the Cloudflare Pages Dashboard:
-# Pages → promocoes-zart → Settings → Environment variables → "Add variable"
-#   Key: SUPABASE_ANON_KEY   Value: (your Supabase anon/public key)
-#
-# Cloudflare Pages substitutes %%SUPABASE_ANON_KEY%% in app.js with this value at the edge.
-# No rebuild needed when rotating the key - just update the env var in the dashboard.
