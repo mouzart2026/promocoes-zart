@@ -8,8 +8,9 @@ compatibility_date = "2024-01-01"
 # [[pages_custom_domains]]
 # domain = "promocoes.zart.com.br"
 
-# Environment variables for Supabase
-# Set SUPABASE_ANON_KEY in Cloudflare Pages Dashboard → Settings → Environment variables
-# (Required for the /api/config function to serve the correct anon key)
-[var]
-SUPABASE_URL = "https://innyohbvgtsoihooykxp.supabase.co"
+# Environment variables must be set in the Cloudflare Pages Dashboard:
+# Pages → promocoes-zart → Settings → Environment variables → "Add variable"
+#   Key: SUPABASE_ANON_KEY   Value: (your Supabase anon/public key)
+#   Key: SUPABASE_URL       Value: https://innyohbvgtsoihooykxp.supabase.co (fallback only)
+#
+# The /api/config function serves these to the frontend at runtime.
