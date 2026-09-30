@@ -1,0 +1,6 @@
+# Build config for PromoZart site
+node_modules/
+.env
+.env.*
+*.log
+.DS_Store

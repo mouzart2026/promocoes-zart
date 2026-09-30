@@ -7,7 +7,7 @@ export default {
                 url: env.SUPABASE_URL || 'https://innyohbvgtsoihooykxp.supabase.co',
                 anonKey: env.SUPABASE_ANON_KEY || '',
                 table: 'ofertas_encontradas',
-                select: 'produto_id,titulo,preco_anterior,preco_novo,queda_pct,link,criado_em,plataforma,imagem',
+                select: 'produto_id,titulo,preco_anterior,preco_novo,queda_pct,link,criado_em,plataforma',
                 order: 'criado_em.desc',
                 limit: 200
             };

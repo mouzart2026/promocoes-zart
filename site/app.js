@@ -11,7 +11,7 @@ const SUPABASE_CONFIG = window.SUPABASE_CONFIG || {
     url: 'https://innyohbvgtsoihooykxp.supabase.co',
     anonKey: '',
     table: 'ofertas_encontradas',
-    select: 'produto_id,titulo,preco_anterior,preco_novo,queda_pct,link,criado_em,plataforma,imagem',
+    select: 'produto_id,titulo,preco_anterior,preco_novo,queda_pct,link,criado_em,plataforma',
     order: 'criado_em.desc',
     limit: 200
 };

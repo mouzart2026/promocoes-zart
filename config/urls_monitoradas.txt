@@ -1,0 +1,11 @@
+# URLs monitoradas pelo crawler PromoZart
+# Formato: uma URL por linha, linhas iniciadas com # são comentários
+
+# Aspirador WAP GTW Inox 12L 1400W
+https://www.mercadolivre.com.br/p/MLB6339958
+
+# Refletor LED Lumanti 100W
+https://www.mercadolivre.com.br/p/MLB70273909
+
+# Novos produtos (adicionar IDs válidos do ML abaixo):
+# https://www.mercadolivre.com.br/p/MLBXXXXXXXX
